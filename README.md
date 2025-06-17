@@ -1,110 +1,130 @@
-# Procesador de Anotaciones de Kindle a Markdown Personalizado
 
+# Kindle Notes Converter
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![PowerShell](https://img.shields.io/badge/PowerShell-5391FE?style=for-the-badge&logo=powershell&logoColor=white) ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-## Descripción del Proyecto
+Una herramienta elegante para Windows que transforma tus anotaciones de Kindle (exportadas como HTML) en archivos Markdown limpios y personalizables, listos para tu sistema de gestión de conocimiento como Obsidian, Logseq o cualquier otro.
 
-Este proyecto es una herramienta diseñada para **procesar y transformar las anotaciones exportadas de Kindle (en formato HTML) a un formato Markdown (`.md`) altamente personalizado**, adaptado a las preferencias estéticas y de procesamiento utilizadas en mi sistema de gestión de notas, como Obsidian.
-
-Aunque existen plugins dentro de Obsidian para procesar estos archivos, su estética por defecto no se alinea con mis requisitos visuales y de formato, haciendo el proceso manual muy tedioso y repetitivo. Por ello, opté por desarrollar esta solución alternativa que garantiza una estética consistente con mis preferencias.
-
----
-
-## Características Principales
-
-* **Conversión Personalizada:** Transforma archivos HTML de anotaciones de Kindle a Markdown siguiendo una estética y estructura definidas.
-* **Automatización del Flujo de Trabajo:** Minimiza la necesidad de procesamiento manual y repetitivo de las notas de lectura.
-* **Interfaz Gráfica Sencilla (Ventanas de Selección):** Utiliza diálogos gráficos de Windows para seleccionar los archivos de entrada y salida, facilitando el uso para cualquier usuario.
-* **Lanzador Rápido:** Incluye un script `tool_launcher.vbs` para un acceso rápido y directo desde el escritorio, evitando la necesidad de ejecutar comandos manualmente en PowerShell.
-* **Integración con Obsidian (y otros sistemas de notas):** Diseñado pensando en la compatibilidad con estéticas de notas personales.
-* **Personalización del Estilo:** El script principal (`kindle_notes_converter.py`) es adaptable, permitiendo modificar fácilmente la estética de salida en Markdown (ej. formato de bloques de cita, notas) según las preferencias del usuario.
+Di adiós al tedioso formateo manual. Define tu estética una vez y convierte tus notas con solo dos clics.
 
 ---
 
-##  Requisitos del Sistema y Dependencias
+## ✨ Características Principales
 
-Para utilizar este proyecto, tu sistema debe cumplir con los siguientes requisitos:
-
-* **Sistema Operativo:** Windows (probado en Windows 10/11)
-* **Python 3:** El script principal está escrito en Python.
-    * Puedes instalarlo fácilmente usando Chocolatey: `choco install python3`
-* **Windows PowerShell:** Viene preinstalado en Windows y es necesario para ejecutar el script coordinador.
-* **VBScript:** Viene preinstalado en Windows y es necesario para el lanzador de escritorio.
-
-### Dependencias de Python (Librerías)
-
-El script de Python requiere las siguientes librerías, que puedes instalar usando `pip`:
-
-* `beautifulsoup4`: Para el análisis (parsing) del contenido HTML de Kindle.
-* `lxml`: Un parser de HTML/XML rápido, utilizado por `beautifulsoup4`.
-
-Puedes instalar ambas librerías ejecutando el siguiente comando en tu terminal:
-
-```bash
-pip install beautifulsoup4 lxml
-```
-##  Instalación y Configuración
-
-Sigue estos pasos para poner en marcha el conversor de notas de Kindle:
-
-1. **Clonar el Repositorio:** Abre una terminal (PowerShell) y clona este repositorio en la ubicación deseada de tu máquina local (ej. `C:\MyKindleNotesProcessor`)
-```bash
-git clone [https://github.com/tu_usuario/nombre_del_repositorio.git](https://github.com/tu_usuario/nombre_del_repositorio.git)
-cd nombre_del_repositorio
-```
-
-2. **Instalar Dependencias de Python:** Asegúrate de tener Python instalado. Luego, desde la raíz del repositorio clonado, ejecuta:
-  
-Bash
-```bash
-pip install beautifulsoup4 lxml
-```
-
-(**Consejo:** Considera crear un entorno virtual para tus proyectos Python para gestionar mejor las dependencias, aunque para este script simple no es estrictamente necesario para empezar.)_
-
-3. **Crear el Lanzador en el Escritorio:**
-
-- Crea un atajo de `tool_launcher.vbs` y pégalo en tu escritorio (o donde prefieras).
-- (Opcional) Puedes cambiarle el nombre a algo más descriptivo, como "Procesar Notas Kindle" y asignarle un ícono personalizado para una mejor identificación visual esto se logra con las propiedades del atajo con `alt + Enter` o click derecho y luego propiedades.
+-   **Formato 100% Personalizable:** Controla el estilo de los títulos, encabezados, citas (highlights) y notas a través de un sencillo archivo de configuración (`config.json`).
+-   **Personalización Intuitiva:** Edita las plantillas como si estuvieras escribiendo en un bloc de notas, sin necesidad de entender caracteres especiales como `\n`.
+-   **Interfaz Gráfica Nativa:** Utiliza los diálogos de "Abrir" y "Guardar" de Windows para una experiencia de usuario fluida y familiar.
+-   **Instalación Simplificada:** Un script se encarga de instalar las dependencias de Python por ti.
+-   **Lanzador Rápido:** Incluye un ejecutable para el escritorio que lanza la herramienta sin mostrar ventanas de terminal.
+-   **Agrupación Inteligente:** Agrupa automáticamente tus notas y highlights bajo los encabezados de sus respectivos capítulos.
+-   **Portátil y Autónomo:** Funciona desde cualquier carpeta de tu ordenador sin necesidad de instalación formal.
 
 ---
 
-##  Uso
+## 🚀 Instalación (en 3 Sencillos Pasos)
 
-1. **Prepara tus Anotaciones HTML:** Exporta tus anotaciones de Kindle (generalmente un archivo `.html`) desde el sitio web de Amazon o desde tu Kindle.
-2. **Ejecuta el Lanzador:** Haz doble clic en el archivo `tool_launcher.vbs` que colocaste en tu escritorio.
-3. **Selecciona el Archivo de Entrada:** Se abrirá una ventana de selección de archivo. Navega hasta tu archivo HTML de anotaciones de Kindle y selecciónalo.
-4. **Selecciona la Ubicación de Salida:** A continuación, se abrirá otra ventana. Elige dónde quieres guardar el archivo Markdown resultante y el nombre que deseas darle (se sugerirá un nombre basado en el HTML de entrada).
-5. **Procesamiento y Confirmación:** El script de PowerShell se ejecutará y llamará a tu script de Python para procesar el archivo. Una vez completado, verás un mensaje de éxito o un error si algo salió mal (los detalles del error aparecerán en la consola de PowerShell si lo ejecutas directamente, o se te indicará dónde buscar).
-6. **Accede a tus Notas Markdown:** El archivo Markdown personalizado se generará en la ubicación que seleccionaste.
+1.  **Descargar la Herramienta**
+    -   Ve a la sección [**Releases**](https://github.com/Wilberucx/Kindle-Highlights-to-MD/releases) en la parte derecha de esta página de GitHub.
+    -   Descarga el archivo `KindleNotesConverter-v1.0.zip` de la última versión.
+    -   Descomprime el archivo `.zip` en una ubicación permanente de tu ordenador (ej. `C:\Herramientas\KindleConverter`).
 
----
+2.  **Instalar Dependencias**
+    -   Dentro de la carpeta descomprimida, haz doble clic en el archivo `Instalar_Dependencias.bat`.
+    -   Aparecerá una ventana de terminal que instalará las librerías de Python necesarias (`beautifulsoup4` y `lxml`).
+    -   *Requisito: Debes tener Python 3 instalado y añadido al PATH de tu sistema.*
 
-##  Personalización de la Estética
+3.  **Crear el Acceso Directo**
+    -   Haz clic derecho sobre el archivo `Lanzador.vbs` y selecciona `Crear acceso directo`.
+    -   Mueve este acceso directo a tu escritorio, barra de tareas o donde prefieras.
+    -   (Opcional) Renómbralo a "Convertir Notas de Kindle" y asígnale un icono personalizado para una mejor identificación.
 
-El estilo de las notas Markdown se define directamente en el script `kindle_notes_converter.py`. Las secciones clave para modificar son:
-
-- **Título del Libro:** Definido por `# {book_title}`.
-- **Separadores:** Líneas `---`.
-- **Resaltados (Highlights):** Utilizan el formato de Obsidian `>[!quote] {page_info}\n>\n> {note_content}\n\n`. Puedes cambiar `[!quote]` por otro tipo de callout de Obsidian, o por un formato de cita estándar de Markdown (ej. `> {note_content}`).
-- **Notas:** Utilizan el formato `**Note**\n- {note_content}\n\n`. Puedes ajustar si quieres negritas, si es una lista (`-`), etc.
-- **Encabezados de Sección:** Las secciones se agrupan con `## {section_in_highlight_heading}`.
-
-Siéntete libre de modificar estas líneas para que la salida se adapte perfectamente a tu sistema de notas y preferencias visuales.
+¡Listo! Tu herramienta está configurada y lista para usarse.
 
 ---
 
-## 📂 Estructura del Proyecto Sugerida
+## 💡 Uso Diario
 
-```
-MyKindleNotesProcessor/
-├── in/                                # (Opcional) Puedes usar esta carpeta para colocar tus archivos HTML de entrada temporalmente.
-├── out/                               # (Opcional) Puedes usar esta carpeta para guardar los archivos Markdown de salida.
-├── kindle_notes_converter.py          # El script principal de Python para la conversión.
-├── InOut_box_windows.ps1              # Script PowerShell que coordina la entrada/salida y ejecuta Python.
-├── tool_launcher.vbs                  # El lanzador VBS para ejecutar el script PowerShell sin complicaciones.
-├── README.md                          # Este documento.
-└── requirements.txt                   # Archivo que lista las dependencias de Python (beautifulsoup4, lxml).
+1.  **Exporta tus notas de Kindle** a un archivo `.html` desde la web de Amazon o tu dispositivo.
+2.  **Haz doble clic** en tu acceso directo "Convertir Notas de Kindle".
+3.  Se abrirá una ventana para que **selecciones el archivo `.html`** de entrada.
+4.  A continuación, se abrirá otra ventana para que **elijas dónde guardar** el archivo `.md` resultante.
+5.  ¡Hecho! El archivo Markdown se generará en la ubicación que seleccionaste, con el formato que definiste.
+
+---
+
+## 🔧 Personalización: Tu Estilo, Tus Reglas (¡Fácil!)
+
+El verdadero poder de esta herramienta está en el archivo `config.json`. Este archivo es tu "panel de control" y te permite dictar, línea por línea, cómo se verá cada parte de tus notas. **Es como escribir en un bloc de notas.**
+
+### ¿Cómo funciona?
+
+El archivo `config.json` contiene plantillas para cada parte de tu nota (título, citas, etc.). Cada plantilla es una **lista de líneas de texto**. El script simplemente tomará estas líneas, rellenará los huecos (placeholders) y las unirá para formar tu archivo final.
+
+### Paso a Paso para Personalizar
+
+1.  **Abre `config.json`:** Búscalo en la carpeta de la herramienta y ábrelo con un editor de texto.
+2.  **Elige la plantilla que quieres cambiar,** por ejemplo, `"highlight"`.
+3.  **Edita las líneas** directamente, tal como lo harías en Obsidian o cualquier editor de Markdown.
+
+   - **¿Quieres una línea en blanco?** Escribe `""`.
+   - **¿Quieres una cita?** Empieza la línea con `> `.
+   - **¿Quieres una lista?** Empieza la línea con `- `.
+
+### Ejemplos Prácticos para Inspirarte
+
+#### 1. Estilo de Cita Minimalista
+
+**Objetivo:** No te gustan los callouts de Obsidian, quieres una cita simple con la página debajo.
+
+**Busca la plantilla `"highlight"` en `config.json`:**
+```json
+"highlight": [
+  ">[!quote] {page_info}",
+  ">",
+  "> {content}"
+],
 ```
 
----
+Reemplázala por tu nuevo estilo:
+```json
+"highlight": [
+  "> {content}",
+  ">",
+  "> — *Página {page_info}*"
+],
+```
+2. Formato de Notas más Visual
+
+Objetivo: Quieres que tus notas personales resalten con un emoji y un separador.
+
+Busca la plantilla "note":
+```json
+"note": [
+  "**Note** - {page_info}",
+  "- {content}"
+],
+```
+Reemplázala por tu nuevo estilo:
+```json
+"note": [
+  "",
+  "---",
+  "✍️ **Mi Nota Personal** ({page_info})",
+  "{content}",
+  "---"
+],
+```
+
+Como puedes ver, lo que escribes en el JSON es casi exactamente lo que obtienes en el resultado final. ¡Es así de simple!
+
+Placeholders Disponibles
+
+Recuerda que puedes usar estos "huecos" en cualquiera de tus líneas:
+
+{book_title}: El título del libro.
+
+{section_title}: El título del capítulo.
+
+{content}: El texto del highlight o tu nota.
+
+{page_info}: La ubicación de la nota.
 

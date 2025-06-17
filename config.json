@@ -1,0 +1,22 @@
+{
+  "pythonExecutable": "python",
+  "templates": {
+    "bookTitle": [
+      "# {book_title}"
+    ],
+    "sectionHeading": [
+      "",
+      "## {section_title}",
+      ""
+    ],
+    "highlight": [
+      ">[!quote] {page_info}",
+      ">",
+      "> {content}"
+    ],
+    "note": [
+      "**Note** - {page_info}",
+      "- {content}"
+    ]
+  }
+}
